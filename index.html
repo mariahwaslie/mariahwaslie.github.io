@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mariah Waslie — Software Engineer & Data Scientist</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  /* ═══ LIGHT THEME (default) ═══ */
+  :root, [data-theme="light"] {
+    --bg: #ffffff;
+    --bg-2: #f8f9fa;
+    --bg-3: #f1f3f5;
+    --border: #e1e4e8;
+    --border-hover: #ced4da;
+    --text: #1a1d23;
+    --text-2: #586069;
+    --text-3: #8b949e;
+    --accent: #2563ff;
+    --accent-dim: #2563ff12;
+    --accent-glow: #2563ff33;
+    --tag-eng: #2563ff12;
+    --tag-eng-t: #2563ff;
+    --tag-ml: #059f6812;
+    --tag-ml-t: #059f68;
+    --tag-ai: #d9770612;
+    --tag-ai-t: #b45309;
+    --tag-live: #059f6825;
+    --tag-live-t: #059f68;
+    --tag-wip: #d9770620;
+    --tag-wip-t: #b45309;
+    --tag-prod: #7c3aed12;
+    --tag-prod-t: #7c3aed;
+    --nav-bg: rgba(255,255,255,0.82);
+    --chip-bg: #f1f3f5;
+    --metric-bg: #f8f9fa;
+    --card-bg: #ffffff;
+    --facts-bg: #1a1d23;
+    --facts-text: #f0f1f3;
+    --facts-dim: #8b949e;
+    --facts-border: #2d3139;
+    --facts-hl: #2563ff;
+    --toggle-bg: #f1f3f5;
+    --toggle-icon: #586069;
+  }
+
+  /* ═══ DARK THEME ═══ */
+  [data-theme="dark"] {
+    --bg: #0a0b0f;
+    --bg-2: #12131a;
+    --bg-3: #1a1c24;
+    --border: #22252e;
+    --border-hover: #2e3240;
+    --text: #e4e5e9;
+    --text-2: #9295a0;
+    --text-3: #5d606e;
+    --accent: #4b83ff;
+    --accent-dim: #4b83ff18;
+    --accent-glow: #4b83ff44;
+    --tag-eng: #4b83ff18;
+    --tag-eng-t: #4b83ff;
+    --tag-ml: #34d39918;
+    --tag-ml-t: #34d399;
+    --tag-ai: #fbbf2418;
+    --tag-ai-t: #fbbf24;
+    --tag-live: #34d39930;
+    --tag-live-t: #34d399;
+    --tag-wip: #fbbf2420;
+    --tag-wip-t: #fbbf24;
+    --tag-prod: #a78bfa18;
+    --tag-prod-t: #a78bfa;
+    --nav-bg: rgba(10,11,15,0.8);
+    --chip-bg: #1a1c24;
+    --metric-bg: #12131a;
+    --card-bg: #12131a;
+    --facts-bg: #12131a;
+    --facts-text: #e4e5e9;
+    --facts-dim: #5d606e;
+    --facts-border: #22252e;
+    --facts-hl: #4b83ff;
+    --toggle-bg: #1a1c24;
+    --toggle-icon: #9295a0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  ::selection { background: var(--accent); color: #fff; }
+
+  .w { max-width: 1040px; margin: 0 auto; padding: 0 28px; }
+
+  /* ═══ NAV ═══ */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 0 28px; background: var(--nav-bg);
+    backdrop-filter: blur(16px); border-bottom: 1px solid transparent;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  nav.scrolled { border-bottom-color: var(--border); }
+  .nav-inner {
+    max-width: 1040px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    height: 56px;
+  }
+  .nav-name {
+    font-weight: 600; font-size: 15px; letter-spacing: -0.01em;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .nav-name::before {
+    content: ''; width: 7px; height: 7px; border-radius: 2px;
+    background: var(--accent);
+  }
+  .nav-right { display: flex; gap: 4px; align-items: center; }
+  .nav-right a {
+    font-size: 13px; font-weight: 500; color: var(--text-2);
+    text-decoration: none; padding: 6px 12px; border-radius: 8px;
+    transition: color 0.2s, background 0.2s;
+  }
+  .nav-right a:hover { color: var(--text); background: var(--bg-3); }
+  .nav-cta {
+    color: var(--accent) !important; border: 1px solid var(--accent-dim);
+    background: var(--accent-dim) !important;
+  }
+  .nav-cta:hover { background: var(--accent) !important; color: #fff !important; border-color: var(--accent) !important; }
+  .theme-toggle {
+    width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--toggle-bg); cursor: pointer; display: flex;
+    align-items: center; justify-content: center; font-size: 15px;
+    color: var(--toggle-icon); transition: all 0.2s; margin-left: 4px;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  @media (max-width: 640px) { .nav-right a:not(.nav-cta) { display: none; } }
+
+  /* ═══ HERO ═══ */
+  .hero { padding: 140px 0 72px; }
+  .hero-grid {
+    display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: end;
+  }
+  @media (max-width: 768px) { .hero-grid { grid-template-columns: 1fr; gap: 28px; } }
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500;
+    color: var(--accent); letter-spacing: 0.05em; margin-bottom: 18px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-weight: 800; font-size: clamp(36px, 6vw, 64px);
+    line-height: 0.97; letter-spacing: -0.035em; margin-bottom: 20px;
+  }
+  .hero h1 .dim { color: var(--text-3); }
+  .hero-desc {
+    font-size: 16px; color: var(--text-2); max-width: 500px;
+    line-height: 1.65; margin-bottom: 28px;
+  }
+  .hero-desc strong { color: var(--text); font-weight: 600; }
+  .hero-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+  .hero-btns a {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 10px 18px; border-radius: 10px; font-size: 13px;
+    font-weight: 600; text-decoration: none; transition: all 0.2s;
+  }
+  .b-fill { background: var(--accent); color: #fff; }
+  .b-fill:hover { box-shadow: 0 0 20px var(--accent-glow); transform: translateY(-1px); }
+  .b-out { border: 1px solid var(--border); color: var(--text-2); }
+  .b-out:hover { border-color: var(--text-2); color: var(--text); }
+  .b-out svg { width: 15px; height: 15px; }
+  .hero-stats {
+    display: flex; flex-direction: column; gap: 18px;
+    border-left: 1px solid var(--border); padding-left: 24px;
+  }
+  @media (max-width: 768px) {
+    .hero-stats { flex-direction: row; gap: 24px; border-left: none; border-top: 1px solid var(--border); padding-left: 0; padding-top: 18px; }
+  }
+  .s-val { font-weight: 800; font-size: 28px; line-height: 1; }
+  .s-val .u { font-size: 16px; color: var(--accent); }
+  .s-lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-3); margin-top: 3px; }
+
+  /* ═══ DIVIDER ═══ */
+  .div { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+  /* ═══ SECTION ═══ */
+  section { padding: 72px 0; }
+  .sl { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 10px; }
+  .st { font-weight: 700; font-size: clamp(26px, 4vw, 36px); letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 10px; }
+  .sd { font-size: 15px; color: var(--text-2); max-width: 480px; }
+
+  /* ═══ ABOUT ═══ */
+  .about-cols { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; margin-top: 36px; }
+  @media (max-width: 768px) { .about-cols { grid-template-columns: 1fr; } }
+  .about-text p { font-size: 15px; color: var(--text-2); margin-bottom: 16px; line-height: 1.7; }
+  .about-text strong { color: var(--text); }
+  .about-facts {
+    background: var(--facts-bg); color: var(--facts-text);
+    border-radius: 14px; padding: 22px; height: fit-content;
+    transition: background 0.3s, color 0.3s;
+  }
+  .about-facts h3 {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    color: var(--facts-dim); letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--facts-border);
+  }
+  .f { display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid var(--facts-border); }
+  .f:last-child { border-bottom: none; padding-bottom: 0; }
+  .fk { font-size: 12px; color: var(--facts-dim); }
+  .fv { font-size: 12px; font-weight: 600; color: var(--facts-text); text-align: right; }
+  .fv .hl { color: var(--facts-hl); }
+
+  /* ═══ PROJECTS ═══ */
+  .pj-grid { display: flex; flex-direction: column; gap: 12px; margin-top: 36px; }
+  .pj {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden; transition: border-color 0.3s, background 0.3s;
+  }
+  .pj:hover { border-color: var(--border-hover); }
+  .pj-top {
+    padding: 22px 24px; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;
+  }
+  .pj-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 10px; }
+  .pt {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500;
+    padding: 3px 9px; border-radius: 5px; letter-spacing: 0.03em;
+  }
+  .pt-e { background: var(--tag-eng); color: var(--tag-eng-t); }
+  .pt-m { background: var(--tag-ml); color: var(--tag-ml-t); }
+  .pt-a { background: var(--tag-ai); color: var(--tag-ai-t); }
+  .pt-l { background: var(--tag-live); color: var(--tag-live-t); }
+  .pt-w { background: var(--tag-wip); color: var(--tag-wip-t); }
+  .pt-p { background: var(--tag-prod); color: var(--tag-prod-t); }
+  .pj-name { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; margin-bottom: 5px; }
+  .pj-sub { font-size: 14px; color: var(--text-2); max-width: 540px; line-height: 1.5; }
+  .pj-arr {
+    flex-shrink: 0; width: 32px; height: 32px; border-radius: 8px;
+    border: 1px solid var(--border); display: flex; align-items: center;
+    justify-content: center; color: var(--text-3); font-size: 15px;
+    transition: all 0.2s;
+  }
+  .pj:hover .pj-arr { border-color: var(--accent); color: var(--accent); }
+  .pj-arr.open { background: var(--accent); color: #fff; border-color: var(--accent); transform: rotate(45deg); }
+  .pj-exp { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+  .pj-exp.open { max-height: 800px; }
+  .pj-inn { padding: 0 24px 24px; border-top: 1px solid var(--border); }
+  .pj-met { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
+  .pm { background: var(--metric-bg); border-radius: 8px; padding: 12px; text-align: center; transition: background 0.3s; }
+  .pm-n { font-weight: 800; font-size: 22px; }
+  .pm-n .u { font-size: 13px; color: var(--accent); }
+  .pm-l { font-size: 10px; color: var(--text-3); margin-top: 2px; }
+  .pj-cols { display: grid; grid-template-columns: 1.4fr 1fr; gap: 28px; padding-top: 20px; }
+  @media (max-width: 700px) { .pj-cols { grid-template-columns: 1fr; } }
+  .pcl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-3); letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 10px; }
+  .pp { list-style: none; }
+  .pp li { font-size: 13px; color: var(--text-2); padding: 5px 0 5px 16px; position: relative; line-height: 1.55; }
+  .pp li::before { content: '—'; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
+  .pchips { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 16px; }
+  .pchip {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    padding: 4px 9px; background: var(--chip-bg); border: 1px solid var(--border);
+    border-radius: 5px; color: var(--text-2); transition: all 0.3s;
+  }
+  .plnks { display: flex; flex-direction: column; gap: 7px; }
+  .plnk {
+    display: flex; align-items: center; gap: 7px; padding: 9px 12px;
+    border: 1px solid var(--border); border-radius: 8px; text-decoration: none;
+    color: var(--text-2); font-size: 12px; font-weight: 500; transition: all 0.2s;
+  }
+  .plnk:hover { border-color: var(--accent); color: var(--accent); }
+  .plnk.off { opacity: 0.4; pointer-events: none; }
+  .plnk svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+  /* ═══ SKILLS ═══ */
+  .sk-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 36px; }
+  @media (max-width: 640px) { .sk-grid { grid-template-columns: 1fr; } }
+  .sk {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 12px; padding: 22px; transition: border-color 0.3s, background 0.3s;
+  }
+  .sk:hover { border-color: var(--border-hover); }
+  .sk-t { font-weight: 600; font-size: 15px; margin-bottom: 12px; display: flex; align-items: center; gap: 7px; }
+  .sk-t .ic { color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+  .sk-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .skt {
+    font-size: 12px; padding: 5px 10px; border-radius: 6px;
+    background: var(--bg-3); border: 1px solid var(--border);
+    color: var(--text-2); transition: all 0.2s;
+  }
+  .skt:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ═══ CONTACT ═══ */
+  .contact { padding: 88px 0; text-align: center; }
+  .contact h2 { font-weight: 800; font-size: clamp(28px, 5vw, 48px); letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 14px; }
+  .contact h2 .bl { color: var(--accent); }
+  .contact-sub { font-size: 15px; color: var(--text-2); max-width: 420px; margin: 0 auto 32px; }
+  .contact-btns { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+  .cb {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 10px 20px; border-radius: 10px; font-size: 13px;
+    font-weight: 600; text-decoration: none; transition: all 0.2s;
+  }
+  .cb-fill { background: var(--accent); color: #fff; }
+  .cb-fill:hover { box-shadow: 0 0 20px var(--accent-glow); }
+  .cb-out { border: 1px solid var(--border); color: var(--text-2); }
+  .cb-out:hover { border-color: var(--text-2); color: var(--text); }
+
+  /* ═══ FOOTER ═══ */
+  footer { border-top: 1px solid var(--border); padding: 24px 0; transition: border-color 0.3s; }
+  .foot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+  .foot-l { font-size: 13px; color: var(--text-3); }
+  .foot-r { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-3); }
+
+  /* ═══ REVEAL ═══ */
+  .rv { opacity: 0; transform: translateY(14px); transition: opacity 0.5s, transform 0.5s; }
+  .rv.in { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <div class="nav-name">Mariah Waslie</div>
+    <div class="nav-right">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="mailto:mariahwaslie@gmail.com" class="nav-cta">Contact</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" id="themeBtn">☀️</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="w">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-label">Software Engineer & Data Scientist</div>
+        <h1>I ship models<br><span class="dim">and the systems</span><br>around them.</h1>
+        <p class="hero-desc">I build <strong>production ML pipelines</strong>, <strong>backend services</strong>, and <strong>data systems</strong> that work beyond the notebook. Two ML models deployed to production serving 500K+ members. Finishing a dual degree in CS & Data Science at UW–River Falls.</p>
+        <div class="hero-btns">
+          <a href="#work" class="b-fill">View projects ↓</a>
+          <a href="https://github.com/mariahwaslie" target="_blank" class="b-out">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02.8-.22 1.65-.33 2.5-.33s1.7.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10.01 10.01 0 0 0 22 12c0-5.52-4.48-10-10-10z"/></svg>
+            GitHub
+          </a>
+          <a href="https://linkedin.com/in/mariah-w-3b97b9233" target="_blank" class="b-out">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div><div class="s-val">500K<span class="u">+</span></div><div class="s-lbl">members in production</div></div>
+        <div><div class="s-val">10<span class="u">+</span></div><div class="s-lbl">ML models built</div></div>
+        <div><div class="s-val">5</div><div class="s-lbl">languages (py/java/r/ts/sql)</div></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<hr class="div">
+
+<section id="about">
+  <div class="w">
+    <div class="sl rv">About</div>
+    <h2 class="st rv">The short version.</h2>
+    <div class="about-cols">
+      <div class="about-text rv">
+        <p>I gravitate toward the <strong>hard part of machine learning</strong> — messy data, real modeling depth, and the question of whether a model actually works once it leaves the notebook. I care equally about the <strong>backend systems</strong> that serve predictions and the <strong>data pipelines</strong> that feed them.</p>
+        <p>During my internship at <strong>Royal Credit Union</strong>, I built ML models across three workstreams — organizational churn prediction, credit card adoption, and product recommendation — evaluating 10+ model architectures and deploying 3 to production via OracleDB, serving 500K+ members. I worked in both Python and R, with Oracle SQL for feature engineering.</p>
+        <p>Since then I've built a <strong>deployed RAG application</strong>, a <strong>calibrated loan-default prediction system</strong> on 1M+ real records, and I'm currently architecting a <strong>FHIR-compliant clinical risk platform</strong> in Java and Python.</p>
+      </div>
+      <div class="about-facts rv">
+        <h3>Quick facts</h3>
+        <div class="f"><span class="fk">Degree</span><span class="fv">B.S. CS & Data Science</span></div>
+        <div class="f"><span class="fk">School</span><span class="fv">UW–River Falls · <span class="hl">2026</span></span></div>
+        <div class="f"><span class="fk">Focus</span><span class="fv">ML + Backend Engineering</span></div>
+        <div class="f"><span class="fk">Production</span><span class="fv"><span class="hl">500K+ member scale</span></span></div>
+        <div class="f"><span class="fk">Certs</span><span class="fv">CITI Human Subjects</span></div>
+        <div class="f"><span class="fk">Status</span><span class="fv"><span class="hl">Open to work</span></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<section id="work">
+  <div class="w">
+    <div class="sl rv">Selected Work</div>
+    <h2 class="st rv">Projects that shipped.</h2>
+    <p class="sd rv">Each one built end-to-end. Click to expand.</p>
+
+    <div class="pj-grid">
+
+      <div class="pj rv">
+        <div class="pj-top" onclick="tog(this)">
+          <div>
+            <div class="pj-tags"><span class="pt pt-p">Production ML</span><span class="pt pt-e">Python · R · Oracle</span></div>
+            <div class="pj-name">ML for Member Analytics — Royal Credit Union</div>
+            <div class="pj-sub">Three production ML workstreams across a 500K+ member dataset: organizational churn prediction, credit card adoption modeling, and product recommendation. 10+ models built, 2 deployed to OracleDB.</div>
+          </div>
+          <div class="pj-arr">+</div>
+        </div>
+        <div class="pj-exp"><div class="pj-inn">
+          <div class="pj-met">
+            <div class="pm"><div class="pm-n">500K<span class="u">+</span></div><div class="pm-l">member records</div></div>
+            <div class="pm"><div class="pm-n">10<span class="u">+</span></div><div class="pm-l">models built</div></div>
+            <div class="pm"><div class="pm-n">2</div><div class="pm-l">deployed to production</div></div>
+          </div>
+          <div class="pj-cols"><div>
+            <div class="pcl">What I built</div>
+            <ul class="pp">
+              <li>Developed ML models across three workstreams: organizational churn prediction (small dataset, overfitting mitigation), credit card adoption modeling, and member product recommendation</li>
+              <li>Built and evaluated 10+ models including neural networks, LightGBM, XGBoost, Random Forest, SVR, and decision trees in Python and R — 2 models deployed to production OracleDB</li>
+              <li>Performed comprehensive data preprocessing: KNN imputation for missing values, categorical encoding, normalization, snapshot-based sampling, and feature engineering via Oracle SQL</li>
+              <li>Conducted EDA using ggplot2, Tidyverse, Matplotlib, Pandas, and NumPy to identify predictive patterns and inform feature selection</li>
+              <li>Evaluated models with ROC-AUC, precision, recall, cross-validation; created data visualizations; documented findings for stakeholder presentations</li>
+              <li>Integrated prediction results into production by building a Python pipeline to load outputs directly into OracleDB</li>
+              <li>Used Power BI for data discovery and identifying relevant datasets across the organization</li>
+            </ul>
+          </div><div>
+            <div class="pcl">Stack</div>
+            <div class="pchips"><span class="pchip">Python</span><span class="pchip">R</span><span class="pchip">Oracle SQL</span><span class="pchip">XGBoost</span><span class="pchip">LightGBM</span><span class="pchip">TensorFlow</span><span class="pchip">Scikit-learn</span><span class="pchip">Power BI</span><span class="pchip">Azure</span><span class="pchip">Git</span></div>
+            <div class="pcl" style="margin-top:12px">Press</div>
+            <div class="plnks">
+              <a href="https://www.uwec.edu/stories/royal-credit-union-teams-three-campuses-ai-solutions" target="_blank" class="plnk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 002-2V4a2 2 0 00-2-2H8a2 2 0 00-2 2v16a2 2 0 01-2 2zm0 0a2 2 0 01-2-2v-9c0-1.1.9-2 2-2h2"/>
+              </svg> Featured in UW-Eau Claire news article</a>
+              <span class="plnk off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg> Proprietary code — internship</span>
+            </div>
+          </div></div>
+        </div></div>
+      </div>
+
+      <div class="pj rv">
+        <div class="pj-top" onclick="tog(this)">
+          <div>
+            <div class="pj-tags"><span class="pt pt-m">ML Engineering</span><span class="pt pt-e">Full Stack · Docker · CI/CD</span></div>
+            <div class="pj-name">Loan Default Risk Modeling — End-to-End ML System</div>
+            <div class="pj-sub">Production ML system: CatBoost classifier with React+TypeScript frontend, FastAPI inference API, Docker deployment, CI/CD pipeline, and structured logging. 1.27M real LendingClub records.</div>
+          </div>
+          <div class="pj-arr">+</div>
+        </div>
+        <div class="pj-exp"><div class="pj-inn">
+          <div class="pj-met">
+            <div class="pm"><div class="pm-n">1.27M</div><div class="pm-l">loan records</div></div>
+            <div class="pm"><div class="pm-n">75</div><div class="pm-l">features (93→75 via SHAP)</div></div>
+            <div class="pm"><div class="pm-n">0.75</div><div class="pm-l">ROC-AUC</div></div>
+          </div>
+          <div class="pj-cols"><div>
+            <div class="pcl">Full system</div>
+            <ul class="pp">
+              <li>React + TypeScript frontend with interactive sliders for real-time loan risk prediction — minimalist SaaS-style UI</li>
+              <li>FastAPI backend with Pydantic validation, structured logging, and modular inference pipeline serving CatBoost predictions</li>
+              <li>Strict leakage prevention: excluded all post-origination fields, temporal train/val/test split (2012-16 / 2017 / 2018)</li>
+              <li>Feature reduction from 93 to 75 using SHAP, isotonic calibration, threshold optimization (F1-optimized at 0.2625)</li>
+              <li>Auxiliary ML model predicts missing DTI values instead of naive imputation</li>
+              <li>Docker Compose multi-service deployment (frontend + backend), GitHub Actions CI with pytest</li>
+            </ul>
+          </div><div>
+            <div class="pcl">Stack</div>
+            <div class="pchips"><span class="pchip">Python</span><span class="pchip">CatBoost</span><span class="pchip">SHAP</span><span class="pchip">FastAPI</span><span class="pchip">React</span><span class="pchip">TypeScript</span><span class="pchip">Docker</span><span class="pchip">CI/CD</span><span class="pchip">pytest</span></div>
+            <div class="plnks"><a href="https://github.com/mariahwaslie" target="_blank" class="plnk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02.8-.22 1.65-.33 2.5-.33s1.7.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10.01 10.01 0 0022 12c0-5.52-4.48-10-10-10z"/></svg> Source code</a></div>
+          </div></div>
+        </div></div>
+      </div>
+
+      <div class="pj rv">
+        <div class="pj-top" onclick="tog(this)">
+          <div>
+            <div class="pj-tags"><span class="pt pt-a">GenAI / RAG</span><span class="pt pt-l">● Live</span></div>
+            <div class="pj-name">AI Reading Companion</div>
+            <div class="pj-sub">Deployed RAG app — upload documents, ask questions, get source-grounded answers with citation verification. LangChain + ChromaDB + LLM APIs.</div>
+          </div>
+          <div class="pj-arr">+</div>
+        </div>
+        <div class="pj-exp"><div class="pj-inn">
+          <div class="pj-cols"><div>
+            <div class="pcl">What it does</div>
+            <ul class="pp">
+              <li>Full RAG architecture: upload → chunk → embed → store → retrieve → generate answers</li>
+              <li>LLM API with prompt engineering, LangChain orchestration, ChromaDB vector storage</li>
+              <li>Citation verification grounds every answer in source text</li>
+              <li>Full-stack: Streamlit frontend, Python backend, vector DB, LLM API</li>
+            </ul>
+          </div><div>
+            <div class="pcl">Stack</div>
+            <div class="pchips"><span class="pchip">Python</span><span class="pchip">LangChain</span><span class="pchip">ChromaDB</span><span class="pchip">Streamlit</span><span class="pchip">LLM API</span></div>
+            <div class="plnks">
+              <a href="https://ai-reading-companion.streamlit.app" target="_blank" class="plnk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg> Live demo</a>
+              <a href="https://github.com/mariahwaslie" target="_blank" class="plnk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02.8-.22 1.65-.33 2.5-.33s1.7.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10.01 10.01 0 0022 12c0-5.52-4.48-10-10-10z"/></svg> Source code</a>
+            </div>
+          </div></div>
+        </div></div>
+      </div>
+
+      <div class="pj rv">
+        <div class="pj-top" onclick="tog(this)">
+          <div>
+            <div class="pj-tags"><span class="pt pt-w">◐ In Progress</span><span class="pt pt-e">Backend · FHIR</span><span class="pt pt-m">ML</span></div>
+            <div class="pj-name">Clinical Risk Platform</div>
+            <div class="pj-sub">FHIR-compliant multi-service healthcare platform — Java/Spring Boot API, Python ML service, PySpark pipeline, clinical data standards.</div>
+          </div>
+          <div class="pj-arr">+</div>
+        </div>
+        <div class="pj-exp"><div class="pj-inn">
+          <div class="pj-cols"><div>
+            <div class="pcl">Architecture</div>
+            <ul class="pp">
+              <li>Java/Spring Boot REST API with FHIR resources (Patient, Observation, Condition, Encounter), LOINC + ICD-10, JWT auth</li>
+              <li>Python/FastAPI ML service for deterioration prediction on time-series vital signs</li>
+              <li>Content-based intervention recommender using similar patient outcomes</li>
+              <li>PySpark pipeline processing MIMIC-III data into Snowflake warehouse</li>
+              <li>Docker, CI/CD via GitHub Actions, JUnit + pytest</li>
+            </ul>
+          </div><div>
+            <div class="pcl">Stack</div>
+            <div class="pchips"><span class="pchip">Java</span><span class="pchip">Spring Boot</span><span class="pchip">FastAPI</span><span class="pchip">FHIR</span><span class="pchip">PySpark</span><span class="pchip">Snowflake</span><span class="pchip">Docker</span><span class="pchip">PostgreSQL</span></div>
+            <div class="plnks"><span class="plnk off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Building now — repo soon</span></div>
+          </div></div>
+        </div></div>
+      </div>
+
+      <div class="pj rv">
+        <div class="pj-top" onclick="tog(this)">
+          <div>
+            <div class="pj-tags"><span class="pt pt-e">Cloud · Serverless</span><span class="pt pt-a">AWS · LLM</span></div>
+            <div class="pj-name">AWS Serverless Quiz Generator</div>
+            <div class="pj-sub">Cloud-native pipeline using AWS CDK (Java) — upload a lecture video, automatically transcribe with AWS Transcribe, generate quizzes via Amazon Bedrock LLM, and store results in S3.</div>
+          </div>
+          <div class="pj-arr">+</div>
+        </div>
+        <div class="pj-exp"><div class="pj-inn">
+          <div class="pj-cols"><div>
+            <div class="pcl">What it does</div>
+            <ul class="pp">
+              <li>Infrastructure as Code with AWS CDK in Java — entire cloud stack defined programmatically, not clicked through a console</li>
+              <li>Event-driven pipeline: S3 upload triggers Lambda → Transcribe converts speech to text → Bedrock LLM generates quiz → JSON saved to S3</li>
+              <li>Resolved real deployment challenges: Lambda 250MB package limits, IAM policy configuration, CDK stack management, CloudFormation debugging</li>
+              <li>Local testing setup with mock S3 events for fast iteration before deploying to AWS</li>
+            </ul>
+          </div><div>
+            <div class="pcl">Stack</div>
+            <div class="pchips"><span class="pchip">Java</span><span class="pchip">AWS CDK</span><span class="pchip">Lambda</span><span class="pchip">S3</span><span class="pchip">Transcribe</span><span class="pchip">Bedrock</span><span class="pchip">CloudFormation</span><span class="pchip">Maven</span></div>
+            <div class="plnks"><a href="https://github.com/mariahwaslie" target="_blank" class="plnk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02.8-.22 1.65-.33 2.5-.33s1.7.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10.01 10.01 0 0022 12c0-5.52-4.48-10-10-10z"/></svg> Source code</a></div>
+          </div></div>
+        </div></div>
+      </div>
+
+      <div class="pj rv">
+        <div class="pj-top" onclick="tog(this)">
+          <div>
+            <div class="pj-tags"><span class="pt pt-p">Reinforcement Learning</span><span class="pt pt-e">Systems Programming</span></div>
+            <div class="pj-name">MLFQ Scheduler with Deep Q-Learning</div>
+            <div class="pj-sub">A Deep Q-Network that learns to optimize CPU scheduling decisions in a Multi-Level Feedback Queue simulator — comparing DQN-based priority selection against traditional MLFQ algorithms.</div>
+          </div>
+          <div class="pj-arr">+</div>
+        </div>
+        <div class="pj-exp"><div class="pj-inn">
+          <div class="pj-cols"><div>
+            <div class="pcl">What it does</div>
+            <ul class="pp">
+              <li>Implemented a full MLFQ CPU scheduler simulator with configurable queues, time slices, allotments, I/O handling, and priority boosting</li>
+              <li>Built a DQN agent (PyTorch) that observes job progress, queue lengths, starvation scores, and CPU utilization to learn optimal priority placement</li>
+              <li>Reward function optimizes for CPU utilization, job progress, lower turnaround time, and reduced starvation simultaneously</li>
+              <li>Tracks response time, turnaround time, waiting time, CPU utilization, and starvation metrics per job for comparison</li>
+            </ul>
+          </div><div>
+            <div class="pcl">Stack</div>
+            <div class="pchips"><span class="pchip">Python</span><span class="pchip">PyTorch</span><span class="pchip">DQN</span><span class="pchip">NumPy</span><span class="pchip">RL</span></div>
+            <div class="plnks"><a href="https://github.com/mariahwaslie" target="_blank" class="plnk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02.8-.22 1.65-.33 2.5-.33s1.7.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10.01 10.01 0 0022 12c0-5.52-4.48-10-10-10z"/></svg> Source code</a></div>
+          </div></div>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<section id="skills">
+  <div class="w">
+    <div class="sl rv">Capabilities</div>
+    <h2 class="st rv">What I work with.</h2>
+    <div class="sk-grid">
+      <div class="sk rv">
+        <div class="sk-t"><span class="ic">{ }</span> Machine Learning</div>
+        <div class="sk-tags"><span class="skt">scikit-learn</span><span class="skt">XGBoost</span><span class="skt">LightGBM</span><span class="skt">CatBoost</span><span class="skt">TensorFlow</span><span class="skt">PyTorch</span><span class="skt">SHAP</span><span class="skt">Calibration</span><span class="skt">Feature Eng.</span></div>
+      </div>
+      <div class="sk rv">
+        <div class="sk-t"><span class="ic">&lt;/&gt;</span> Backend & Full Stack</div>
+        <div class="sk-tags"><span class="skt">Spring Boot</span><span class="skt">FastAPI</span><span class="skt">Flask</span><span class="skt">Django</span><span class="skt">REST APIs</span><span class="skt">JWT</span><span class="skt">React</span><span class="skt">TypeScript</span><span class="skt">WebSockets</span></div>
+      </div>
+      <div class="sk rv">
+        <div class="sk-t"><span class="ic">#</span> Languages & Data</div>
+        <div class="sk-tags"><span class="skt">Python</span><span class="skt">Java</span><span class="skt">R</span><span class="skt">SQL</span><span class="skt">PostgreSQL</span><span class="skt">Oracle</span><span class="skt">Pandas</span><span class="skt">NumPy</span></div>
+      </div>
+      <div class="sk rv">
+        <div class="sk-t"><span class="ic">~</span> AI, Cloud & DevOps</div>
+        <div class="sk-tags"><span class="skt">LangChain</span><span class="skt">RAG</span><span class="skt">ChromaDB</span><span class="skt">NLP</span><span class="skt">AWS</span><span class="skt">Docker</span><span class="skt">CI/CD</span><span class="skt">Git</span><span class="skt">Power BI</span><span class="skt">Streamlit</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<section id="education">
+  <div class="w">
+    <div class="sl rv">Education</div>
+    <h2 class="st rv">B.S. Computer Science & Data Science</h2>
+    <p class="sd rv" style="max-width:600px">University of Wisconsin–River Falls · Expected August 2026</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:32px;">
+      <div class="sk rv">
+        <div class="sk-t">Relevant Coursework</div>
+        <div class="sk-tags">
+          <span class="skt">Machine Learning</span>
+          <span class="skt">Cloud Computing</span>
+          <span class="skt">Database Management</span>
+          <span class="skt">Operating Systems</span>
+          <span class="skt">Software Engineering</span>
+          <span class="skt">Data Structures & Algorithms</span>
+          <span class="skt">Probability & Statistics</span>
+          <span class="skt">Linear Algebra</span>
+        </div>
+      </div>
+      <div class="sk rv">
+        <div class="sk-t">Certifications</div>
+        <div style="margin-top:4px;">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; padding:10px 0; border-bottom:1px solid var(--border);">
+            <span style="font-size:14px; font-weight:600;">CITI Human Subjects Research</span>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-3);">June 2026</span>
+          </div>
+          <div style="font-size:13px; color:var(--text-2); padding-top:8px;">PhysioNet credentialed researcher with MIMIC-III clinical database access for healthcare data science research.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<section class="contact" id="contact">
+  <div class="w rv">
+    <h2>Let's <span class="bl">build something</span><br>together.</h2>
+    <p class="contact-sub">Looking for data science, ML engineering, backend SWE, and analyst roles. If you're hiring — let's talk.</p>
+    <div class="contact-btns">
+      <a href="mailto:mariahwaslie@gmail.com" class="cb cb-fill">✉ mariahwaslie@gmail.com</a>
+      <a href="https://linkedin.com/in/mariah-w-3b97b9233" target="_blank" class="cb cb-out">LinkedIn</a>
+      <a href="https://github.com/mariahwaslie" target="_blank" class="cb cb-out">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="w foot">
+    <div class="foot-l">Mariah Waslie · 2026</div>
+    <div class="foot-r">HTML + CSS + JS</div>
+  </div>
+</footer>
+
+<script>
+// Theme toggle
+function toggleTheme() {
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  const next = current === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  document.getElementById('themeBtn').textContent = next === 'light' ? '☀️' : '🌙';
+  localStorage.setItem('theme', next);
+}
+
+// Load saved theme
+const saved = localStorage.getItem('theme');
+if (saved) {
+  document.documentElement.setAttribute('data-theme', saved);
+  document.getElementById('themeBtn').textContent = saved === 'light' ? '☀️' : '🌙';
+}
+
+// Nav scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', scrollY > 16);
+});
+
+// Project toggle
+function tog(el) {
+  const pj = el.closest('.pj');
+  const exp = pj.querySelector('.pj-exp');
+  const arr = pj.querySelector('.pj-arr');
+  const open = exp.classList.contains('open');
+  document.querySelectorAll('.pj-exp.open').forEach(e => {
+    e.classList.remove('open');
+    e.closest('.pj').querySelector('.pj-arr').classList.remove('open');
+  });
+  if (!open) { exp.classList.add('open'); arr.classList.add('open'); }
+}
+
+// Reveal on scroll
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
+</body>
+</html>
